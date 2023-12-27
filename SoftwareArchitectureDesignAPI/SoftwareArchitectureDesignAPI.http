@@ -1,0 +1,6 @@
+@SoftwareArchitectureDesignAPI_HostAddress = http://localhost:5282
+
+GET {{SoftwareArchitectureDesignAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
