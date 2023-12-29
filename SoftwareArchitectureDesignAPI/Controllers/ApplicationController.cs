@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using SoftwareArchitectureDesignAPI.Data;
+
 namespace SoftwareArchitectureDesignAPI.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
@@ -7,16 +10,27 @@ namespace SoftwareArchitectureDesignAPI.Controllers
     public class ApplicationController : ControllerBase
     {
         private readonly ILogger<ApplicationController> _logger;
+        private readonly IDbContextFactory<DataContext> _contextFactory;
 
-        public ApplicationController(ILogger<ApplicationController> logger)
+        public ApplicationController(ILogger<ApplicationController> logger, 
+            IDbContextFactory<DataContext> contextFactory)
         {
             _logger = logger;
+            _contextFactory = contextFactory;
         }
 
         [HttpPost("submitapplication")]
         public IActionResult SubmitApplication()
         {
-            return new OkObjectResult("SUBMITTED") ;
+            var context = _contextFactory.CreateDbContext();
+            var test = context.Countries.ToList();
+            
+            return new OkObjectResult(test) ;
+            
+            /*using (var context = _contextFactory.CreateDbContext())
+            {
+                return new OkObjectResult(context.Countries.ToList()) ;
+            }*/
         }
         
         [HttpPost("approveapplication")]

@@ -1,5 +1,7 @@
 namespace SoftwareArchitectureDesignAPI.Data
 {
+    using Entities;
+    
     using Microsoft.EntityFrameworkCore;
     public class DataContext : DbContext
     {
@@ -7,5 +9,7 @@ namespace SoftwareArchitectureDesignAPI.Data
             : base(options)
         {
         }
+        
+        public DbSet<Country> Countries { get; set; }
     }
 }
