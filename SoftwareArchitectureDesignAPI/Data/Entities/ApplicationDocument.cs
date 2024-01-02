@@ -19,13 +19,12 @@ namespace SoftwareArchitectureDesignAPI.Data.Entities
         [Column("UploadedDate")]
         public DateTime UploadedDate { get; set; }
         
-        [Column("UpdatedDate")]
-        public DateTime UpdatedDate { get; set; }
-        
         [Column("VisaDocumentId"), ForeignKey("VisaDocumentId")]
         public VisaDocument VisaDocument { get; set; }   
+        public int VisaDocumentId { get; set; }
         
         [Column("ApplicationId"), ForeignKey("ApplicationId")]
-        public Application Application { get; set; }  
+        public Application Application { get; set; }
+        public int ApplicationId { get; set; }
     }
 }

@@ -4,7 +4,7 @@ namespace SoftwareArchitectureDesignAPI.Resources
     {
         private int userId { get; set; }
         public int visaId { get; set; }
-        public Dictionary<int, ApplicationDocumentModel> DocumentPaths { get; set; }
+        public Dictionary<int , ApplicationDocumentModel> DocumentPaths { get; set; }
     }
 }
 

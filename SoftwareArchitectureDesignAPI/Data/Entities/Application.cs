@@ -20,9 +20,12 @@ namespace SoftwareArchitectureDesignAPI.Data.Entities
         public DateTime UpdatedDate { get; set; }
         
         [Column("VisaId"), ForeignKey("VisaId")]
-        public Visa Visa { get; set; }   
+        public Visa Visa { get; set; }  
+        public int VisaId { get; set; }
         
         [Column("UserId"), ForeignKey("UserId")]
-        public User User { get; set; }  
+        public User User { get; set; } 
+        public int UserId { get; set; }
+
     }
 }
