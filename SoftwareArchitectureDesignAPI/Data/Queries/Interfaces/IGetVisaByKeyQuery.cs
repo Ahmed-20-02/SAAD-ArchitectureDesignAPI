@@ -2,8 +2,8 @@ namespace SoftwareArchitectureDesignAPI.Data.Queries.Interfaces
 {
     using SoftwareArchitectureDesignAPI.Data.Entities;
 
-    public interface IGetUserByKeyQuery
+    public interface IGetVisaByKeyQuery
     {
-        Task<User> Get(int id);
+        Task<Visa> Get(int id);
     }
 }

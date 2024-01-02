@@ -4,21 +4,21 @@ namespace SoftwareArchitectureDesignAPI.Data.Queries
     using SoftwareArchitectureDesignAPI.Data.Entities;
     using SoftwareArchitectureDesignAPI.Data.Queries.Interfaces;
 
-    public class GetUserByKeyQuery : IGetUserByKeyQuery
+    public class GetVisaByKeyQuery : IGetVisaByKeyQuery
     {
         private readonly IDbContextFactory<DataContext> _contextFactory;
 
-        public GetUserByKeyQuery(IDbContextFactory<DataContext> contextFactory)
+        public GetVisaByKeyQuery(IDbContextFactory<DataContext> contextFactory)
         {
             _contextFactory = contextFactory;
         }
 
-        public async Task<User> Get(int id)
+        public async Task<Visa> Get(int id)
         {
             using (var context = _contextFactory.CreateDbContext())
             {
-               return context.Users.Include("Role").FirstOrDefaultAsync(x => x.UserId == id).Result
-                       ?? throw new NullReferenceException("No user found");
+                return context.Visas.Include("Country").FirstOrDefault(x => x.VisaId == id)
+                       ?? throw new NullReferenceException("No Visa found");
             }
         }
     }
