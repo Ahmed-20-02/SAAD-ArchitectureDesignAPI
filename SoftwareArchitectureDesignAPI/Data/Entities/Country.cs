@@ -1,4 +1,3 @@
-
 namespace SoftwareArchitectureDesignAPI.Data.Entities
 {
     using System.ComponentModel.DataAnnotations.Schema;
@@ -17,7 +16,10 @@ namespace SoftwareArchitectureDesignAPI.Data.Entities
         [Column("Capital")]
         public string Capital { get; set; }
         
+        [Column("Description")]
+        public string Description { get; set; }
+        
         [Column("ISOCode")]
-        public int ISOCode { get; set; }
+        public string ISOCode { get; set; }
     }
 }
