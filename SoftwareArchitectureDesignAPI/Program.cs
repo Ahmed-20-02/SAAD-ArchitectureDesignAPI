@@ -1,19 +1,29 @@
 using Microsoft.EntityFrameworkCore;
 using SoftwareArchitectureDesignAPI.Data;
-
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using SoftwareArchitectureDesignAPI.Business.AutofacDependencies;
 
 var builder = WebApplication.CreateBuilder(args);
-// Add services to the container.
+
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
+    .ConfigureContainer<ContainerBuilder>(builder =>
+    {
+        builder.RegisterModule(new AutofacBusinessModule());
+    });
 
 builder.Services.AddControllers();
-/*builder.Services.AddDbContext<DataContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnection")));*/
+
+// Add services to the container.
+
+//DB CONTEXT POOL IS BETTER FOR PERFORMANCE - LOOKS FOR EXISTING CONTEXTS RATHER THAN MAKE A NEW ONE EVERYTIME 
+/*builder.Services.AddDbContextPool<DataContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnection")));
+builder.Services.AddScoped<IDataContext, DataContext>();*/
 
 builder.Services.AddDbContextFactory<DataContext>(
     options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnection")));
-
-Console.WriteLine(builder.Configuration.GetConnectionString("DBConnection"));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
