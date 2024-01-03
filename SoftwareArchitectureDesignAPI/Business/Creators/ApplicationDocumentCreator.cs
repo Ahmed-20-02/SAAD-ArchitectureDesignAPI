@@ -1,7 +1,6 @@
 namespace SoftwareArchitectureDesignAPI.Business.Creators
 {
     using SoftwareArchitectureDesignAPI.Data.Commands.Interfaces;
-    using SoftwareArchitectureDesignAPI.Data.Entities;
     using SoftwareArchitectureDesignAPI.Resources;
     using SoftwareArchitectureDesignAPI.Business.Creators.Interfaces;
     
