@@ -4,14 +4,16 @@ namespace SoftwareArchitectureDesignAPI.Data.Commands
     using SoftwareArchitectureDesignAPI.Data.Entities;
     using SoftwareArchitectureDesignAPI.Resources;
     using Microsoft.EntityFrameworkCore;
+    using ILogger = SoftwareArchitectureDesignAPI.Logger.ILogger;
+
 
     public class CreateApplicationCommand : ICreateApplicationCommand
     {
         private readonly IDbContextFactory<DataContext> _contextFactory;
-        private readonly ILogger<CreateApplicationCommand> _logger;
+        private readonly ILogger _logger;
         
         public CreateApplicationCommand(IDbContextFactory<DataContext> contextFactory, 
-            ILogger<CreateApplicationCommand> logger)
+            ILogger logger)
         {
             _contextFactory = contextFactory;
             _logger = logger;
@@ -21,7 +23,7 @@ namespace SoftwareArchitectureDesignAPI.Data.Commands
         {
             try
             {
-                _logger.LogInformation($"Inserting application for user id {request.userId} " +
+                _logger.Log($"Inserting application for user id {request.userId} " +
                                        $"and visa id {request.Application.visaId}");
                 
                 using (var context = _contextFactory.CreateDbContext())

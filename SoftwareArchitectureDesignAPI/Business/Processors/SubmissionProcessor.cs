@@ -3,17 +3,19 @@ namespace SoftwareArchitectureDesignAPI.Business.Processors
     using SoftwareArchitectureDesignAPI.Resources;
     using SoftwareArchitectureDesignAPI.Business.Creators.Interfaces;
     using SoftwareArchitectureDesignAPI.Business.Processors.Interfaces;
+    using ILogger = SoftwareArchitectureDesignAPI.Logger.ILogger;
+
 
     public class SubmissionProcessor : ISubmissionProcessor
     {
         private readonly IApplicationCreator _applicationCreator;
         private readonly IApplicationDocumentCreator _applicationDocumentCreator;
-        private readonly ILogger<SubmissionProcessor> _logger;
+        private readonly ILogger _logger;
 
 
         public SubmissionProcessor(IApplicationCreator applicationCreator,
             IApplicationDocumentCreator applicationDocumentCreator, 
-            ILogger<SubmissionProcessor> logger)
+            ILogger logger)
         {
             _applicationCreator = applicationCreator;
             _applicationDocumentCreator = applicationDocumentCreator;
@@ -28,7 +30,7 @@ namespace SoftwareArchitectureDesignAPI.Business.Processors
 
                 foreach (var doc in request.Application.DocumentPaths)
                 {
-                    _logger.LogInformation($"Inserting document record {doc.Value.fileName} for application " +
+                    _logger.Log($"Inserting document record {doc.Value.fileName} for application " +
                                            $"{application.ApplicationId}");
                     
                     var model = new CreateDocumentModel()
@@ -45,7 +47,7 @@ namespace SoftwareArchitectureDesignAPI.Business.Processors
                     _applicationDocumentCreator.Create(model);
                 }
 
-                _logger.LogInformation($"Finished submission process for user id {request.userId} " +
+                _logger.Log($"Finished submission process for user id {request.userId} " +
                                        $"and visa id. Application id {application.ApplicationId}");                
                 return new SubmissionResponse()
                 {

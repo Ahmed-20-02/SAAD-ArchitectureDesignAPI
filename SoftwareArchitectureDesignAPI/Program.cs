@@ -16,11 +16,6 @@ builder.Services.AddControllers();
 
 // Add services to the container.
 
-//DB CONTEXT POOL IS BETTER FOR PERFORMANCE - LOOKS FOR EXISTING CONTEXTS RATHER THAN MAKE A NEW ONE EVERYTIME 
-/*builder.Services.AddDbContextPool<DataContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnection")));
-builder.Services.AddScoped<IDataContext, DataContext>();*/
-
 builder.Services.AddDbContextFactory<DataContext>(
     options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnection")));

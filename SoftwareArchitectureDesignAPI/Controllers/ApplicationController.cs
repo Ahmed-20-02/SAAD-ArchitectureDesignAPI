@@ -1,20 +1,18 @@
-using System.Net;
-
 namespace SoftwareArchitectureDesignAPI.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using SoftwareArchitectureDesignAPI.Business.Processors.Interfaces;
     using SoftwareArchitectureDesignAPI.Resources;
-    using System.IO;
+    using ILogger = SoftwareArchitectureDesignAPI.Logger.ILogger;
 
     [ApiController]
     [Route("[controller]")]
     public class ApplicationController : ControllerBase
     {
-        private readonly ILogger<ApplicationController> _logger;
+        private readonly ILogger _logger;
         private readonly ISubmissionProcessor _submissionProcessor;
 
-        public ApplicationController(ILogger<ApplicationController> logger,
+        public ApplicationController(ILogger logger,
             ISubmissionProcessor submissionProcessor)
         {
             _logger = logger;
@@ -26,17 +24,10 @@ namespace SoftwareArchitectureDesignAPI.Controllers
         {
             try
             {
-               // string rt = "";
-                /*using (StreamWriter writer = new StreamWriter("D:\\Github Repos\\SAAD-ArchitectureDesignAPI\\Logs.txt"))
-                {
-                    /*writer.WriteLine($"Starting submission process for user id {request.userId} " +
-                                     $"and visa id {request.Application.visaId}");#1#
-                    
-                }*/
+                this._logger.Log($"Starting submission process for user id {request.userId} " +
+                                 $"and visa id {request.Application.visaId}");
                 
-                return new OkObjectResult(System.IO.File.ReadAllText("D:\\Github Repos\\SAAD-ArchitectureDesignAPI\\Logs.txt"));
-                
-              //  return new OkObjectResult(_submissionProcessor.Process(request));
+                return new OkObjectResult(_submissionProcessor.Process(request));
             }
             catch (Exception e)
             {
