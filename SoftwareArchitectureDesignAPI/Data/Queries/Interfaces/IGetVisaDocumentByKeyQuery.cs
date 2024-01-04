@@ -1,4 +1,4 @@
-namespace SoftwareArchitectureDesignAPI.Data.Queries
+namespace SoftwareArchitectureDesignAPI.Data.Queries.Interfaces
 {
     using SoftwareArchitectureDesignAPI.Data.Entities;
 

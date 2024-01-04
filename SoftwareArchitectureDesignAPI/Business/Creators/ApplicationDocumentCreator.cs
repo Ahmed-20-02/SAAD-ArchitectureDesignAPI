@@ -22,7 +22,7 @@ namespace SoftwareArchitectureDesignAPI.Business.Creators
 
             catch (Exception e)
             {
-                throw new Exception("Something went wrong");
+                throw new Exception(e.Message);
             }
         }
     }

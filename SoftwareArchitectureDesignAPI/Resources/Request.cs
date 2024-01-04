@@ -2,6 +2,6 @@ namespace SoftwareArchitectureDesignAPI.Resources
 {
     public class Request
     {
-        public int UserId { get; set; }
+        public int userId { get; set; }
     }
 }

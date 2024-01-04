@@ -1,7 +1,10 @@
+
 namespace SoftwareArchitectureDesignAPI.Data.Queries
 {
     using Microsoft.EntityFrameworkCore;
     using SoftwareArchitectureDesignAPI.Data.Entities;
+    using SoftwareArchitectureDesignAPI.Data.Queries.Interfaces;
+
 
     public class GetVisaDocumentByKeyQuery : IGetVisaDocumentByKeyQuery
     {

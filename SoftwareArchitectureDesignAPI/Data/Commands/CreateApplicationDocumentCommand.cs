@@ -1,25 +1,17 @@
 namespace SoftwareArchitectureDesignAPI.Data.Commands
 {
     using SoftwareArchitectureDesignAPI.Data.Entities;
-    using SoftwareArchitectureDesignAPI.Data.Queries.Interfaces;
     using SoftwareArchitectureDesignAPI.Resources;
     using Microsoft.EntityFrameworkCore;
     using SoftwareArchitectureDesignAPI.Data.Commands.Interfaces;
-    using SoftwareArchitectureDesignAPI.Data.Queries;
 
     public class CreateApplicationDocumentCommand : ICreateApplicationDocumentCommand
     {
         private readonly IDbContextFactory<DataContext> _contextFactory;
-        private readonly IGetApplicationByKeyQuery _getApplicationByKeyQuery;
-        private readonly IGetVisaDocumentByKeyQuery _getVisaDocumentByKeyQuery;
 
-        public CreateApplicationDocumentCommand(IDbContextFactory<DataContext> contextFactory,
-            IGetApplicationByKeyQuery getApplicationByKeyQuery,
-            IGetVisaDocumentByKeyQuery getVisaDocumentByKeyQuery)
+        public CreateApplicationDocumentCommand(IDbContextFactory<DataContext> contextFactory)
         {
             _contextFactory = contextFactory;
-            _getApplicationByKeyQuery = getApplicationByKeyQuery;
-            _getVisaDocumentByKeyQuery = getVisaDocumentByKeyQuery;
         }
 
         public void Create(CreateDocumentModel createDocumentModel)
@@ -33,10 +25,6 @@ namespace SoftwareArchitectureDesignAPI.Data.Commands
                     applicationDocument.FileName = createDocumentModel.document.fileName;
                     applicationDocument.FilePath = createDocumentModel.document.filePath;
                     applicationDocument.UploadedDate = DateTime.Now;
-                    /*applicationDocument.Application = this._getApplicationByKeyQuery
-                        .Get(createDocumentModel.applicationId).Result;
-                    applicationDocument.VisaDocument = _getVisaDocumentByKeyQuery
-                        .Get(createDocumentModel.visaDocumentId).Result;*/
                     applicationDocument.ApplicationId = createDocumentModel.applicationId;
                     applicationDocument.VisaDocumentId = createDocumentModel.visaDocumentId;
 
@@ -46,7 +34,7 @@ namespace SoftwareArchitectureDesignAPI.Data.Commands
             }
             catch (Exception e)
             {
-                throw new Exception("Something went wrong");
+                throw new Exception(e.Message);
             }
         }
     }

@@ -1,12 +1,11 @@
-using Microsoft.EntityFrameworkCore;
-using SoftwareArchitectureDesignAPI.Data;
-using SoftwareArchitectureDesignAPI.Data.Entities;
+using System.Net;
 
 namespace SoftwareArchitectureDesignAPI.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using SoftwareArchitectureDesignAPI.Business.Processors.Interfaces;
     using SoftwareArchitectureDesignAPI.Resources;
+    using System.IO;
 
     [ApiController]
     [Route("[controller]")]
@@ -14,66 +13,35 @@ namespace SoftwareArchitectureDesignAPI.Controllers
     {
         private readonly ILogger<ApplicationController> _logger;
         private readonly ISubmissionProcessor _submissionProcessor;
-        private readonly IDbContextFactory<DataContext> _contextFactory;
-
 
         public ApplicationController(ILogger<ApplicationController> logger,
-            ISubmissionProcessor submissionProcessor,
-            IDbContextFactory<DataContext> contextFactory)
+            ISubmissionProcessor submissionProcessor)
         {
             _logger = logger;
             _submissionProcessor = submissionProcessor;
-            _contextFactory = contextFactory;
         }
 
         [HttpPost("submitapplication")]
         public IActionResult SubmitApplication( [FromBody] SubmissionRequest request)
         {
-            /*using (var cntxt = _contextFactory.CreateDbContext())
-            {
-                var test = cntxt.Users.Include("Role").ToList();
-                return new OkObjectResult(test) ;
-            }*/
-            
-            /*using (var context = _contextFactory.CreateDbContext())
-            {
-                /*context.Documents.Add(new Document()
-                {
-                    Name = "TEST"
-                });
-
-                context.SaveChanges();#1#
-                
-                return new OkObjectResult(context.Documents);
-            }*/
-
             try
             {
-                return new OkObjectResult(_submissionProcessor.Process(request));
+               // string rt = "";
+                /*using (StreamWriter writer = new StreamWriter("D:\\Github Repos\\SAAD-ArchitectureDesignAPI\\Logs.txt"))
+                {
+                    /*writer.WriteLine($"Starting submission process for user id {request.userId} " +
+                                     $"and visa id {request.Application.visaId}");#1#
+                    
+                }*/
+                
+                return new OkObjectResult(System.IO.File.ReadAllText("D:\\Github Repos\\SAAD-ArchitectureDesignAPI\\Logs.txt"));
+                
+              //  return new OkObjectResult(_submissionProcessor.Process(request));
             }
             catch (Exception e)
             {
                 return new BadRequestObjectResult(e.Message);
             }
-            
-           // return new OkObjectResult(_getUserByKeyQuery.Get(1));
-
-            /*using (var context = _contextFactory.CreateDbContext())
-            {
-                return new OkObjectResult(context.Countries.ToList()) ;
-            }*/
-        }
-
-        [HttpPost("approveapplication")]
-        public IActionResult ApproveApplication()
-        {
-            /*var x = new SubmissionRequest()
-            {
-                application = new Application(),
-                userId = 123
-            };*/
-
-            return new OkObjectResult("APPROVED");
         }
     }
 }
