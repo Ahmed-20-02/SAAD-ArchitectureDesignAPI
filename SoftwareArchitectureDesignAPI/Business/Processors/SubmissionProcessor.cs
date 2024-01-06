@@ -5,7 +5,6 @@ namespace SoftwareArchitectureDesignAPI.Business.Processors
     using SoftwareArchitectureDesignAPI.Business.Processors.Interfaces;
     using ILogger = SoftwareArchitectureDesignAPI.Logger.ILogger;
 
-
     public class SubmissionProcessor : ISubmissionProcessor
     {
         private readonly IApplicationCreator _applicationCreator;
@@ -58,7 +57,7 @@ namespace SoftwareArchitectureDesignAPI.Business.Processors
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                throw new Exception("Something went wrong");
             }
         }
     }

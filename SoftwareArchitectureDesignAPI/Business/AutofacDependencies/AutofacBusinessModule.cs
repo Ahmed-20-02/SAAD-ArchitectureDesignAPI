@@ -12,3 +12,7 @@ namespace SoftwareArchitectureDesignAPI.Business.AutofacDependencies
         }
     }
 }
+
+//Reference
+//https://stackoverflow.com/questions/69754985/adding-autofac-to-net-core-6-0-using-the-new-single-file-template/71448702#71448702
+//02/01/2024
