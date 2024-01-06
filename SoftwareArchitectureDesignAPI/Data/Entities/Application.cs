@@ -26,6 +26,5 @@ namespace SoftwareArchitectureDesignAPI.Data.Entities
         [Column("UserId"), ForeignKey("UserId")]
         public User User { get; set; } 
         public int UserId { get; set; }
-
     }
 }
